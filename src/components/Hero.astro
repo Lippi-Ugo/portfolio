@@ -1,0 +1,38 @@
+---
+import { Picture } from 'astro:assets';
+
+const { src, alt, title} = Astro.props;
+---
+
+<section class="w-full">
+  <div class="relative w-full">
+      <Picture
+        pictureAttributes={{ class: `w-full h-[420px] sm:h-[520px] md:h-[640px] object-cover` }}
+        class="w-full"
+        formats={["avif", "webp"]}
+        widths={[540, 1024, src.width ?? 1600]}
+        sizes={`(max-width: 540px) 540px, (max-width: 1024px) 1024px, ${src.width ?? 1600}px`}
+        src={src}
+        alt={alt}
+        loading="lazy"
+      />
+
+    <div class="absolute inset-0 flex flex-col items-center justify-end pb-16 lg:pb-20 pointer-events-none">
+      <h1 class="text-white text-4xl sm:text-5xl lg:text-7xl font-extrabold text-center drop-shadow-lg pointer-events-auto">{title}</h1>
+      <div class="flex flex-col items-center mt-4 mb-8">
+      <span class="text-md text-gray-300 pt-40">Scrollez plus bas</span>
+      <div class="relative w-14 h-28 rounded-[28px] border-2 border-neutral-200 mt-3">
+        <span class="absolute left-1/2 -translate-x-1/2 top-[10%] w-4 h-4 rounded-full bg-neutral-200 animate-[scrollDot_1.4s_ease-in-out_infinite]"></span>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scrollDot {
+    0% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(60%); opacity: 0.35; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+</style>

@@ -3,6 +3,8 @@ import pb from "../utils/pb.ts";
 import Layout from "../layouts/Layout.astro";
 import ActivityBar from "../components/ActivityBar.astro";
 import SkillCard from "../components/SkillCard.astro";
+import Hero from "../components/Hero.astro";
+import Situation from "../assets/misesituationdev.webp";
 
 export async function allCompetencesSorted() {
   const allCompetencesSorted = await pb
@@ -21,7 +23,7 @@ const projets = await allCompetencesSorted();
     <main
         class="min-w-full min-h-screen flex flex-col justify-center items-center"
     >
-        <h1 class="font-bold m-40 text-center">À propos de moi</h1>
+        <Hero src={Situation} alt="À propos" title="À propos de moi"/>
         <p class="max-w-9/12 pt-30 px-50 text-[20px]">
             Originaire de Bourgogne, j’ai 19 ans et je suis en 2ᵉ année de BUT
             Métiers du Multimédia et de l’Internet à l’IUT de Montbéliard, avec
@@ -33,7 +35,7 @@ const projets = await allCompetencesSorted();
             solides, et réfléchir à la meilleure façon de rendre un site fluide
             et cohérent. 
         </p>
-        <p class="max-w-9/12 px-50 pb-6 text-[20px]">
+        <p class="max-w-9/12 px-50 pb-6 text-xl">
             Grâce aux projets réalisés pendant ma formation, j’ai
             pu tester différents <span class="text-[#36C5F9]">frameworks</span>, outils et méthodes de travail.
             Chaque expérience m’a permis de progresser, de mieux comprendre les
@@ -42,6 +44,7 @@ const projets = await allCompetencesSorted();
             nouveaux défis, apprendre, et construire des choses utiles et bien
             pensées.
         </p>
+        <h2 class="text-5xl">Mes Compétences</h2>
         <div class="grid gap-30 md:grid-cols-2 lg:grid-cols-2 mb-25">
             {projets.map((projet) => <SkillCard {...projet} />)}
         </div>
