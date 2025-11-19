@@ -1,0 +1,49 @@
+---
+import pb from "../utils/pb.ts";
+import Layout from "../layouts/Layout.astro";
+import ActivityBar from "../components/ActivityBar.astro";
+import SkillCard from "../components/SkillCard.astro";
+
+export async function allCompetencesSorted() {
+  const allCompetencesSorted = await pb
+    .collection("competences")
+    .getFullList({ sort: "created" });
+  return allCompetencesSorted;
+}
+
+const projets = await allCompetencesSorted();
+---
+
+<Layout title="À propos">
+    <div class="fixed top-0 left-0 w-[70px] h-screen z-20">
+        <ActivityBar />
+    </div>
+    <main
+        class="min-w-full min-h-screen flex flex-col justify-center items-center"
+    >
+        <h1 class="font-bold m-40 text-center">À propos de moi</h1>
+        <p class="max-w-9/12 pt-30 px-50 text-[20px]">
+            Originaire de Bourgogne, j’ai 19 ans et je suis en 2ᵉ année de BUT
+            Métiers du Multimédia et de l’Internet à l’IUT de Montbéliard, avec
+            une spécialisation en <span class="text-[#36C5F9]"
+                >développement web</span
+            >. Je me forme pour devenir <span class="text-[#36C5F9]">développeur full stack</span>, avec un vrai
+            intérêt pour les logiques techniques que ce soit côté <span class="text-[#36C5F9]">front</span> ou <span class="text-[#36C5F9]">back</span>.
+            J’aime structurer des interfaces claires, coder des fonctionnalités
+            solides, et réfléchir à la meilleure façon de rendre un site fluide
+            et cohérent. 
+        </p>
+        <p class="max-w-9/12 px-50 pb-6 text-[20px]">
+            Grâce aux projets réalisés pendant ma formation, j’ai
+            pu tester différents <span class="text-[#36C5F9]">frameworks</span>, outils et méthodes de travail.
+            Chaque expérience m’a permis de progresser, de mieux comprendre les
+            enjeux du web moderne, et de développer une approche logique,
+            autonome et exigeante. Je suis toujours partant pour relever de
+            nouveaux défis, apprendre, et construire des choses utiles et bien
+            pensées.
+        </p>
+        <div class="grid gap-30 md:grid-cols-2 lg:grid-cols-2 mb-25">
+            {projets.map((projet) => <SkillCard {...projet} />)}
+        </div>
+    </main>
+</Layout>
