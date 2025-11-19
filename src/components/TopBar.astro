@@ -1,0 +1,28 @@
+---
+import Logo from '/src/assets/logo.svg';
+import Trait from '/src/assets/trait.svg';
+import Carre from '/src/assets/carré.svg';
+import Croix from '/src/assets/croix.svg';
+---
+<main>
+    <div
+        class="bg-[#333333] text-white flex items-center justify-between px-4 h-14 fixed top-0 left-0 w-full shadow-md"
+    >
+        <a href="/" class="flex items-center">
+            <Logo/>
+        </a>
+
+        <!-- Encadré Portfolio -->
+        <div
+            class="flex items-center justify-center border border-[#4A4848] rounded-lg w-[640px] h-5 mx-auto"
+        >
+            <span class="text-[12px] text-[#CCCCCC]">Portfolio_ugo_lippi</span>
+        </div>
+
+        <div class="window-controls flex items-center gap-3">
+            <Trait/>
+            <Carre/>
+            <Croix/>
+        </div>
+    </div>
+</main>

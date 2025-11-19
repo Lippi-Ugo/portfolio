@@ -1,11 +1,126 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Card from "../components/Card.astro";
+import Layout from "../layouts/Layout.astro";
+import ActivityBar from "../components/ActivityBar.astro";
+import pb from "../utils/pb.ts";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+export async function allProjetsSorted() {
+  const allProjetsSorted = await pb
+    .collection("projets")
+    .getFullList({ sort: "created" });
+  return allProjetsSorted;
+}
+
+const projets = await allProjetsSorted();
 ---
 
 <Layout>
-	<Welcome />
+  <div class="fixed top-0 left-0 w-[70px] h-screen z-20">
+    <ActivityBar />
+  </div>
+  <main
+    class="min-w-full min-h-screen flex flex-col justify-center items-center"
+  >
+    <div
+      id="typewriter-container"
+      class="flex justify-center items-center h-[30vh] pt-96 pb-40"
+    >
+      <p
+        id="typewriter"
+        class="text-white text-[48px] font-normal wrap-break-word lg:text-[96px]"
+      >
+      </p>
+      <span
+        id="cursor"
+        class="text-white text-[48px] font-normal animate-[blink_1s_step-end_infinite] -z-10 lg:text-[96px]"
+        >|</span
+      >
+    </div>
+
+    <div>
+      <h1 class="text-[#36C5F9] font-bold mb-6 text-center">
+        Développeur Web
+      </h1>
+    </div>
+
+    <!-- Scroll indicator placed under the title (in-flow, larger) -->
+    <div class="flex flex-col items-center mt-4 mb-8">
+      <span class="text-md text-gray-300 pt-40">Scrollez plus bas</span>
+      <div class="relative w-14 h-28 rounded-[28px] border-2 border-orange-500 mt-3">
+        <span class="absolute left-1/2 -translate-x-1/2 top-[10%] w-4 h-4 rounded-full bg-orange-500 animate-[scrollDot_1.4s_ease-in-out_infinite]"></span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 items-center lg:pl-90 lg:px-50 lg:py-30 gap-20">
+      <div class="order-last lg:order-first">
+        <h2 class="pb-6 text-2xl">Bonjour, moi c’est <span class="text-2xl text-[#36C5F9]">Ugo</span> !</h2>
+        <p class="pb-6 text-lg">
+          Ayant grandi avec Internet et découvert le code en cours de route, je
+          vous invite à explorer mon parcours, mes projets et les solutions web
+          que je développe. À travers mes réalisations, je combine technique et
+          créativité pour concevoir des interfaces modernes, logiques et
+          adaptées aux enjeux du numérique.
+        </p>
+
+        <div class="flex flex-col lg:flex-row items-center gap-3 lg:gap-4">
+          <div class="relative flex justify-center items-center gap-2 mb-2 border-5 border-[#4A4848] rounded-[50px] lg:w-[350px] lg:h-[65px]">
+            <a href="/a-propos" class="w-full lg:w-auto h-full flex items-center justify-center text-center text-[#36C5F9] font-bold text-xl font-cascadia uppercase">En savoir plus</a>
+          </div>
+          <div class="relative flex justify-center items-center gap-2 mb-2 border-5 border-[#4A4848] rounded-[50px] lg:w-[350px] lg:h-[65px]">
+            <a href="/src/assets/cv.pdf" target="_blank" class="w-full lg:w-auto h-full flex items-center justify-center text-center text-[#36C5F9] font-bold text-xl font-cascadia uppercase">Télécharger mon cv</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center items-center order-first lg:order-last">
+        <img src="/src/assets/Ugo_lippi.webp" alt="Portrait d'Ugo Lippi — développeur web" class="w-full lg:w-1/2 h-auto">
+      </div>
+    </div>
+
+    <div class="grid gap-40 md:grid-cols-2 lg:grid-cols-3">
+      {projets.slice(0, 3).map((projet) => <Card {...projet} />)}
+    </div>
+
+    <div
+      class="relative inline-flex justify-center items-center gap-2 mb-2 border-5 border-[#4A4848] rounded-[50px] lg:w-[350px] lg:h-[65px] lg:m-12"
+    >
+      <a
+        href="/projets"
+        class="text-[#36C5F9] font-bold text-xl font-cascadia uppercase"
+        >Découvrez tous mes projets</a
+      >
+    </div>
+
+    
+
+    <script>
+      const text = "Ugo LIPPI";
+      const typewriterElement = document.getElementById("typewriter");
+      const cursorElement = document.getElementById("cursor");
+      let index = 0;
+      function typeWriter() {
+        if (index < text.length) {
+          typewriterElement.textContent += text.charAt(index);
+          index++;
+          setTimeout(typeWriter, 200);
+        } else {
+          cursorElement.classList.add("blink");
+        }
+      }
+      typeWriter();
+    </script>
+
+    <style>
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scrollDot {
+        0% { transform: translateY(0); opacity: 1; }
+        50% { transform: translateY(82%); opacity: 0.95; }
+        100% { transform: translateY(0); opacity: 1; }
+      }
+    </style>
+  </main>
 </Layout>

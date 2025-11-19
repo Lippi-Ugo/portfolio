@@ -1,0 +1,30 @@
+---
+ 
+---
+
+<div class="bg-[#181818] flex flex-col items-center py-4 top-0 w-[70px] h-screen relative">
+  <a href="#" id="activity-files" class="absolute top-[98px] left-3.5 cursor-pointer">
+    <img src="/src/assets/activity-bar-files.svg" alt="Files" />
+  </a>
+  <a href="/settings" class="absolute top-[925px] left-3.5 cursor-pointer">
+    <img src="/src/assets/activity-bar-settings-gear.svg" alt="Settings" />
+  </a>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filesLink = document.getElementById('activity-files');
+    if (!filesLink) return;
+
+    filesLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const container = document.getElementById('header-container');
+      const header = document.getElementById('header');
+      if (container) {
+        container.classList.toggle('hidden');
+      } else if (header) {
+        header.classList.toggle('hidden');
+      }
+    });
+  });
+</script>
