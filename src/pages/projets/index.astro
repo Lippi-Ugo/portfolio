@@ -1,0 +1,31 @@
+---
+import Card from "../../components/Card.astro";
+import Layout from "../../layouts/Layout.astro";
+import ActivityBar from "../../components/ActivityBar.astro";
+import pb from "../../utils/pb.ts";
+
+export async function allProjetsSorted() {
+  const allProjetsSorted = await pb
+    .collection("projets")
+    .getFullList({ sort: "created" });
+  return allProjetsSorted;
+}
+
+const projets = await allProjetsSorted();
+---
+
+<Layout title="Projets">
+  <div class="fixed top-0 left-0 w-[70px] h-screen z-20">
+    <ActivityBar />
+  </div>
+  <main
+    class="min-w-full min-h-screen flex flex-col justify-center items-center"
+  >
+    <h1 class="font-bold m-40 text-center">
+      Découvrez mes projets
+    </h1>
+    <div class="grid gap-30 md:grid-cols-2 lg:grid-cols-3 mb-25">
+      {projets.map((projet) => <Card {...projet} />)}
+    </div>
+  </main>
+</Layout>
