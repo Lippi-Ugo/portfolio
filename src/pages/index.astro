@@ -19,7 +19,7 @@ const projets = await allProjetsSorted();
     <ActivityBar />
   </div>
   <main
-    class="min-w-full min-h-screen flex flex-col justify-center items-center ml-5"
+    class="w-full min-h-screen flex flex-col justify-center items-center ml-5 lg:ml-0"
   >
     <div
       id="typewriter-container"
@@ -32,7 +32,7 @@ const projets = await allProjetsSorted();
       </p>
       <span
         id="cursor"
-        class="text-white text-[48px] font-normal animate-[blink_1s_step-end_infinite] -z-10 lg:text-[96px]"
+        class="text-white text-[48px] font-normal animate-[blink_1s_step-end_infinite] lg:text-[96px]"
         >|</span
       >
     </div>
@@ -75,7 +75,7 @@ const projets = await allProjetsSorted();
       </div>
     </div>
 
-    <div class="grid gap-10 lg:gap-40 md:grid-cols-2 lg:grid-cols-3 ml-2 pb-12">
+    <div class="grid gap-10 lg:gap-30 md:grid-cols-2 lg:grid-cols-3 ml-2 pb-12">
       {projets.slice(0, 3).map((projet) => <Card {...projet} />)}
     </div>
     <div class="pb-10">
