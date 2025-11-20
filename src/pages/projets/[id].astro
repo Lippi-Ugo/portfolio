@@ -43,25 +43,23 @@ const project = await oneID(id);
             <aside
                 class="lg:col-span-5 flex flex-col items-center lg:items-end gap-6"
             >
-                <div class="w-40 lg:w-48 h-auto p-2 rounded-lg shadow-lg">
-                    <ImgPb
+                <div class="w-auto h-[480px] lg:h-[720px] p-2 rounded-lg shadow-lg">
+            <ImgPb
                         record={project}
                         field="image_2"
                         alt={project.nom}
-                        classPicture="col-start-1 row-start-1 w-full h-auto object-cover"
+                        classPicture="w-full h-full"
                         classImg="object-cover w-full h-full"
                     />
                 </div>
 
                 <div class="flex flex-col gap-4 items-center lg:items-end">
-                    <div
-                        class="w-28 lg:w-32 h-auto bg-[#0b0b0b] p-2 rounded shadow"
-                    >
-                        <ImgPb
+                    <div class="w-auto h-[360px] lg:h-[420px] bg-[#0b0b0b] p-2 rounded shadow">
+              <ImgPb
                             record={project}
                             field="image_3"
                             alt={project.nom}
-                            classPicture="col-start-1 row-start-1 w-full h-auto object-cover"
+                            classPicture="w-full h-full"
                             classImg="object-cover w-full h-full"
                         />
                     </div>
