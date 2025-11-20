@@ -24,7 +24,7 @@ const projets = await allCompetencesSorted();
         class="min-w-full min-h-screen flex flex-col justify-center items-center"
     >
         <Hero src={Situation} alt="À propos" title="À propos de moi"/>
-        <p class="max-w-9/12 pt-30 px-50 text-[20px]">
+        <p class="max-w-9/12 pt-30 px-10 text-md lg:px-50 lg:text-xl">
             Originaire de Bourgogne, j’ai 19 ans et je suis en 2ᵉ année de BUT
             Métiers du Multimédia et de l’Internet à l’IUT de Montbéliard, avec
             une spécialisation en <span class="text-[#36C5F9]"
@@ -35,7 +35,7 @@ const projets = await allCompetencesSorted();
             solides, et réfléchir à la meilleure façon de rendre un site fluide
             et cohérent. 
         </p>
-        <p class="max-w-9/12 px-50 pb-6 text-xl">
+        <p class="max-w-9/12 pt-5 pb-20 px-10 text-md lg:px-50 lg:text-xl">
             Grâce aux projets réalisés pendant ma formation, j’ai
             pu tester différents <span class="text-[#36C5F9]">frameworks</span>, outils et méthodes de travail.
             Chaque expérience m’a permis de progresser, de mieux comprendre les
@@ -44,8 +44,8 @@ const projets = await allCompetencesSorted();
             nouveaux défis, apprendre, et construire des choses utiles et bien
             pensées.
         </p>
-        <h2 class="text-5xl">Mes Compétences</h2>
-        <div class="grid gap-30 md:grid-cols-2 lg:grid-cols-2 mb-25">
+        <h2 class="text-2xl lg:text-5xl pb-10">Mes Compétences</h2>
+        <div class="grid gap-10 lg:gap-30 md:grid-cols-2 lg:grid-cols-2 b-25">
             {projets.map((projet) => <SkillCard {...projet} />)}
         </div>
     </main>
