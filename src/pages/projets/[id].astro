@@ -1,0 +1,71 @@
+---
+import ActivityBar from "../../components/ActivityBar.astro";
+import Layout from "../../layouts/Layout.astro";
+import pb from "../../utils/pb.ts";
+import ImgPb from "../../components/ImgPb.astro";
+
+export async function oneID(id) {
+    const record = await pb.collection("projets").getOne(id);
+    return record;
+}
+const { id } = Astro.params;
+const project = await oneID(id);
+---
+
+<Layout title={project.nom}>
+    <div class="fixed top-0 left-0 w-[70px] h-screen z-20">
+            <ActivityBar />
+    </div>
+    <main class="text-[#e6e6e6] min-h-screen ml-15 lg:ml-0">
+        <!-- Fullscreen hero image using ImgPb -->
+        <div class="w-full h-screen relative mb-12">
+            <ImgPb
+                record={project}
+                field="image"
+                alt={project.nom}
+                classPicture="absolute inset-0 w-full h-full"
+                classImg="object-cover w-full h-full z-0"
+            />
+        </div>
+
+        <!-- Content area: left text, right mockups -->
+        <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg: max-w-9/10 mx-auto px-6 lg:px-0 mb-20"
+        >
+            <section class="lg:col-span-7 prose max-w-none text-[#e6e6e6]">
+                <h2 class="text-3xl lg:text-4xl font-mono mb-7" set:html={project.titre}></h2>
+                <div class="text-2xl text-[#4A4848] pb-10" set:html={project.date}></div>
+                <div class="leading-relaxed" set:html={project.description}></div>
+                <div class="mt-25" set:html={project.text2}></div>
+            </section>
+
+            <aside
+                class="lg:col-span-5 flex flex-col items-center lg:items-end gap-6"
+            >
+                <div class="w-40 lg:w-48 h-auto p-2 rounded-lg shadow-lg">
+                    <ImgPb
+                        record={project}
+                        field="image_2"
+                        alt={project.nom}
+                        classPicture="col-start-1 row-start-1 w-full h-auto object-cover"
+                        classImg="object-cover w-full h-full"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-4 items-center lg:items-end">
+                    <div
+                        class="w-28 lg:w-32 h-auto bg-[#0b0b0b] p-2 rounded shadow"
+                    >
+                        <ImgPb
+                            record={project}
+                            field="image_3"
+                            alt={project.nom}
+                            classPicture="col-start-1 row-start-1 w-full h-auto object-cover"
+                            classImg="object-cover w-full h-full"
+                        />
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+</Layout>
